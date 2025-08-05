@@ -1,8 +1,8 @@
-name: Generate Pacman Contribution Graph
+name: Generate Contribution Animations
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Atualiza todo dia
+    - cron: "0 0 * * *" # roda todo dia à meia-noite
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Generate Pacman Graph
+      # 🟡 Gera Pac-Man
+      - name: Generate Pac-Man Graph
         uses: Platane/snk@v3
         with:
           github_user_name: MateusFego
@@ -20,6 +21,16 @@ jobs:
             dist/pacman-contribution-graph.svg
             dist/pacman-contribution-graph-dark.svg
 
+      # 🐍 Gera Snake Animation
+      - name: Generate Snake Graph
+        uses: Platane/snk@v3
+        with:
+          github_user_name: MateusFego
+          outputs: |
+            dist/snake.svg
+            dist/snake-dark.svg
+
+      # 🔥 Faz o push para o branch output
       - name: Push Generated Files
         uses: crazy-max/ghaction-github-pages@v3
         with:
